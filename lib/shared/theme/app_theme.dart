@@ -7,6 +7,7 @@ class AppTheme {
     appBarTheme: const AppBarTheme(
       color: Colors.lightGreen,
       elevation: 0,
+      iconTheme: IconThemeData(color: Colors.white),
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ButtonStyle(
@@ -22,6 +23,8 @@ class AppTheme {
         foregroundColor: MaterialStateProperty.all(Colors.lightGreen),
       ),
     ),
+    floatingActionButtonTheme: const FloatingActionButtonThemeData(
+      backgroundColor: Colors.lightGreen,
+    ),
   );
 }
- 

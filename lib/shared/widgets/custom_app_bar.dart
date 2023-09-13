@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final double height;
+  final Widget leading;
   const CustomAppBar({
     super.key,
     this.height = 20.0,
+    this.leading = const SizedBox.shrink(),
   });
 
   @override
@@ -13,13 +15,9 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         preferredSize: Size.fromHeight(kToolbarHeight + height),
         child: ClipPath(
           clipper: RoundShape(),
-          child: Container(
-            color: Colors.lightGreen,
-            //TODO: refactor if we need
-            child: const Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[],
-            ),
+          child: AppBar(
+            backgroundColor: Colors.lightGreen,
+            leading: leading,
           ),
         ));
   }

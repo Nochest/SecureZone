@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tesis_app/shared/widgets/custom_app_bar.dart';
+import 'package:tesis_app/views/report_map_view.dart';
 
 class VerificationView extends StatefulWidget {
   const VerificationView({super.key});
@@ -40,6 +41,33 @@ class _VerificationViewState extends State<VerificationView> {
                   fontWeight: FontWeight.w500,
                 ),
               ),
+              Row(
+                children: [
+                  Flexible(
+                      child: TextFormField(
+                    keyboardType: TextInputType.number,
+                    textAlign: TextAlign.center,
+                  )),
+                  const SizedBox(width: 16),
+                  Flexible(
+                      child: TextFormField(
+                    keyboardType: TextInputType.number,
+                    textAlign: TextAlign.center,
+                  )),
+                  const SizedBox(width: 16),
+                  Flexible(
+                      child: TextFormField(
+                    keyboardType: TextInputType.number,
+                    textAlign: TextAlign.center,
+                  )),
+                  const SizedBox(width: 16),
+                  Flexible(
+                      child: TextFormField(
+                    keyboardType: TextInputType.number,
+                    textAlign: TextAlign.center,
+                  )),
+                ],
+              ),
               Align(
                 alignment: Alignment.topLeft,
                 child: TextButton(
@@ -50,6 +78,10 @@ class _VerificationViewState extends State<VerificationView> {
             ],
           ),
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => Navigator.pushNamed(context, ReportMapview.route),
+        child: const Icon(Icons.arrow_forward_rounded),
       ),
     );
   }
