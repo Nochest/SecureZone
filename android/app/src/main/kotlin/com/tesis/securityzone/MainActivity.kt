@@ -1,4 +1,4 @@
-package com.example.tesis_app
+package com.tesis.securityzone
 
 import io.flutter.embedding.android.FlutterActivity
 

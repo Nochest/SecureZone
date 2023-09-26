@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
@@ -16,7 +17,7 @@ class ReportMapview extends StatefulWidget {
 
 class _ReportMapviewState extends State<ReportMapview> {
   final CameraPosition _kGooglePlex = const CameraPosition(
-    target: LatLng(37.42796133580664, -122.085749655962),
+    target: LatLng(-12.046281994931284, -77.04274582312306),
     zoom: 14.4746,
   );
   Future<Position> _determinePosition() async {
@@ -46,8 +47,15 @@ class _ReportMapviewState extends State<ReportMapview> {
   final Completer<GoogleMapController> _controller =
       Completer<GoogleMapController>();
 
+//TODO: SHOW DIALOG AND MARKERS FROM BACKEND
   @override
   Widget build(BuildContext context) {
+    Timer.periodic(const Duration(seconds: 5), (timer) async {
+      final r = await Geolocator.getCurrentPosition();
+      print('${r.latitude},${r.longitude}');
+      print('SERVICE LAUNCHED');
+      //showDialog(context: context, builder: (context) => AlertDialog());
+    });
     return Scaffold(
       body: Stack(
         alignment: Alignment.bottomCenter,

@@ -17,14 +17,16 @@ class _SplashViewState extends State<SplashView> {
         child: Column(
           children: [
             const SizedBox(height: 24),
-            Placeholder(
-              fallbackWidth: MediaQuery.of(context).size.width / 3,
-              fallbackHeight: 100,
+            Image.asset(
+              'assets/logo_app.png',
+              width: MediaQuery.of(context).size.width / 3,
+              height: 100,
             ),
             const SizedBox(height: 16),
-            Placeholder(
-              fallbackWidth: MediaQuery.of(context).size.width,
-              fallbackHeight: MediaQuery.of(context).size.height / 2,
+            Image.asset(
+              'assets/paisaje_app.png',
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height / 2,
             ),
             const SizedBox(height: 48),
             ElevatedButton(
