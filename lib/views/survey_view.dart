@@ -76,7 +76,7 @@ class _SurveyViewState extends State<SurveyView> {
                       color: Colors.amber,
                     ),
                     onRatingUpdate: (rating) {
-                      print(rating);
+                      // print(rating);
                     },
                   ),
                   TextFormField(

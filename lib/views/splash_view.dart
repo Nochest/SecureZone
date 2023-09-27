@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tesis_app/shared/helpers/get_position.dart';
 import 'package:tesis_app/shared/routes/routes.dart';
 
 class SplashView extends StatefulWidget {
@@ -9,6 +10,12 @@ class SplashView extends StatefulWidget {
 }
 
 class _SplashViewState extends State<SplashView> {
+  @override
+  void initState() {
+    GetCurrentPosition().determinePosition();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,7 +38,7 @@ class _SplashViewState extends State<SplashView> {
             const SizedBox(height: 48),
             ElevatedButton(
               onPressed: () => Navigator.pushNamed(context, LoginView.route),
-              child: Text('Ingresar'),
+              child: const Text('Ingresar'),
             ),
             const SizedBox(height: 8),
             TextButton(

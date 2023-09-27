@@ -1,9 +1,12 @@
 import 'dart:async';
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:provider/provider.dart';
+import 'package:tesis_app/providers/map_provider.dart';
+import 'package:tesis_app/shared/helpers/get_position.dart';
 import 'package:tesis_app/views/profile_view.dart';
 import 'package:tesis_app/views/report_view.dart';
 import 'package:tesis_app/views/survey_view.dart';
@@ -17,55 +20,58 @@ class ReportMapview extends StatefulWidget {
 
 class _ReportMapviewState extends State<ReportMapview> {
   final CameraPosition _kGooglePlex = const CameraPosition(
-    target: LatLng(-12.046281994931284, -77.04274582312306),
+    target: LatLng(-11.922794543845349,
+        -77.04878777540037), //Parque Metropolitano SinchiRoca
     zoom: 14.4746,
   );
-  Future<Position> _determinePosition() async {
-    bool serviceEnabled;
-    LocationPermission permission;
-
-    serviceEnabled = await Geolocator.isLocationServiceEnabled();
-    if (!serviceEnabled) {
-      return Future.error('Location services are disabled.');
-    }
-
-    permission = await Geolocator.checkPermission();
-    if (permission == LocationPermission.denied) {
-      permission = await Geolocator.requestPermission();
-      if (permission == LocationPermission.denied) {
-        return Future.error('Location permissions are denied');
-      }
-    }
-
-    if (permission == LocationPermission.deniedForever) {
-      return Future.error(
-          'Location permissions are permanently denied, we cannot request permissions.');
-    }
-    return await Geolocator.getCurrentPosition();
-  }
 
   final Completer<GoogleMapController> _controller =
       Completer<GoogleMapController>();
 
-//TODO: SHOW DIALOG AND MARKERS FROM BACKEND
+  @override
+  void initState() {
+    final mapProvider = Provider.of<MapProvider>(context, listen: false);
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      await mapProvider.getMapZones(context);
+    });
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    Timer.periodic(const Duration(seconds: 5), (timer) async {
-      final r = await Geolocator.getCurrentPosition();
-      print('${r.latitude},${r.longitude}');
-      print('SERVICE LAUNCHED');
-      //showDialog(context: context, builder: (context) => AlertDialog());
+    final mapProvider = Provider.of<MapProvider>(context);
+
+    Timer.periodic(const Duration(minutes: 2), (timer) async {
+      mapProvider.getMapZones(context);
+      Geolocator.getCurrentPosition().then((r) {
+        if (mapProvider.markers.any((e) =>
+            Geolocator.distanceBetween(r.latitude, r.longitude,
+                e.position.latitude, e.position.longitude) <
+            50)) {
+          showDialog(
+              context: context,
+              builder: (context) {
+                return AlertDialog(
+                  title: Text('Zona de peligro'),
+                );
+              });
+        }
+        print('${r.latitude},${r.longitude}');
+        print('SERVICE LAUNCHED');
+      });
     });
+
     return Scaffold(
       body: Stack(
         alignment: Alignment.bottomCenter,
         children: [
           GoogleMap(
+            markers: mapProvider.markers,
             zoomControlsEnabled: false,
             mapType: MapType.normal,
             initialCameraPosition: _kGooglePlex,
             onMapCreated: (GoogleMapController controller) async {
-              _determinePosition().then((value) async {
+              GetCurrentPosition().determinePosition().then((value) async {
                 _controller.complete(controller);
                 final r = await _controller.future;
                 r.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
@@ -77,6 +83,7 @@ class _ReportMapviewState extends State<ReportMapview> {
                 )));
               });
             },
+            myLocationEnabled: true,
           ),
           Container(
             padding: const EdgeInsets.all(32),

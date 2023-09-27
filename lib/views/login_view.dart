@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tesis_app/services/account_service.dart';
 import 'package:tesis_app/shared/widgets/custom_app_bar.dart';
-import 'package:tesis_app/views/verification_view.dart';
 import 'package:tesis_app/views/report_map_view.dart';
 
 class LoginView extends StatefulWidget {

@@ -14,9 +14,8 @@ class AccountService {
             Query.equal('email', email),
             Query.equal('password', password),
           ]);
-      inspect(document);
     } on AppwriteException catch (e) {
-      print(e.message);
+      log(e.message!);
     }
   }
 }
