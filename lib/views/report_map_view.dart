@@ -55,6 +55,7 @@ class _ReportMapviewState extends State<ReportMapview> {
                   title: Text('Zona de peligro'),
                 );
               });
+          return;
         }
         print('${r.latitude},${r.longitude}');
         print('SERVICE LAUNCHED');

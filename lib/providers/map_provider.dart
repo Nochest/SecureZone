@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:tesis_app/models/map_zones.dart';
 import 'package:tesis_app/services/map_report_service.dart';
@@ -47,6 +48,27 @@ class MapProvider extends ChangeNotifier {
         } else {
           //TODO: HANDLE EMPTY
         }
+      });
+    } catch (e) {
+      //TODO: HANDLE CATCH
+    }
+  }
+
+  Future<void> reportZone(BuildContext context) async {
+    try {
+      await Geolocator.getCurrentPosition().then((r) async {
+        //TODO: NEEDS APPWRITE STORAGE REPORT
+        await MapReporService()
+            .reportZone(r.latitude.toString(), r.longitude.toString(), 'red')
+            .then((value) {
+          if (value) {
+            Navigator.pop(context);
+            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+              content: Text('Registro exitoso.'),
+              backgroundColor: Colors.green,
+            ));
+          } else {}
+        });
       });
     } catch (e) {
       //TODO: HANDLE CATCH

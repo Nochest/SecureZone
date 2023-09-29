@@ -45,15 +45,12 @@ class MapReporService {
   Future<bool> reportZone(String lat, String lon, String color) async {
     try {
       final r = await http.post(
-          Uri.https(
-            Constants.url,
-            '/classify',
-          ),
-          headers: {
-            'lat': lat,
-            'lon': lon,
-            'color': color,
-          });
+        Uri.https(Constants.url, '/zones', {
+          'lat': lat,
+          'lon': lon,
+          'color': color,
+        }),
+      );
       if (r.statusCode == 200) {
         return true;
       } else {

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:tesis_app/providers/map_provider.dart';
 import 'package:tesis_app/shared/widgets/custom_app_bar.dart';
 
 class ReportView extends StatefulWidget {
@@ -11,6 +13,7 @@ class ReportView extends StatefulWidget {
 class _ReportViewState extends State<ReportView> {
   @override
   Widget build(BuildContext context) {
+    final mapProvider = Provider.of<MapProvider>(context);
     return Scaffold(
       appBar: const CustomAppBar(
         height: 140,
@@ -78,7 +81,9 @@ class _ReportViewState extends State<ReportView> {
               ),
               const Spacer(),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () async {
+                  await mapProvider.reportZone(context);
+                },
                 child: const Text('Enviar'),
               ),
             ],
