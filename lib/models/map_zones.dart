@@ -23,6 +23,7 @@ class MapZone {
 class Zone {
   String color;
   String geolocalizacion;
+  String modalidad;
   String lugar;
   int sumaX;
   int index;
@@ -31,6 +32,7 @@ class Zone {
 
   Zone({
     required this.color,
+    required this.modalidad,
     required this.geolocalizacion,
     required this.lugar,
     required this.sumaX,
@@ -45,6 +47,7 @@ class Zone {
 
   factory Zone.fromMap(Map<String, dynamic> json) => Zone(
         color: json['COLOR'],
+        modalidad: json['MODALIDAD'],
         geolocalizacion: json['GEOLOCALIZACION'],
         lugar: json['LUGAR'],
         sumaX: json['SUMA_X'],
@@ -56,6 +59,7 @@ class Zone {
   Map<String, dynamic> toMap() => {
         'COLOR': color,
         'GEOLOCALIZACION': geolocalizacion,
+        'MODALIDAD': modalidad,
         'LUGAR': lugar,
         'SUMA_X': sumaX,
         'index': index,

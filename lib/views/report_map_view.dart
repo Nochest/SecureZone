@@ -40,9 +40,9 @@ class _ReportMapviewState extends State<ReportMapview> {
   @override
   Widget build(BuildContext context) {
     final mapProvider = Provider.of<MapProvider>(context);
+    mapProvider.getMapZones(context);
 
-    Timer.periodic(const Duration(minutes: 2), (timer) async {
-      mapProvider.getMapZones(context);
+    Timer.periodic(const Duration(minutes: 5), (timer) {
       Geolocator.getCurrentPosition().then((r) {
         if (mapProvider.markers.any((e) =>
             Geolocator.distanceBetween(r.latitude, r.longitude,
