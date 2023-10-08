@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:tesis_app/providers/account_provider.dart';
 import 'package:tesis_app/services/account_service.dart';
 import 'package:tesis_app/shared/widgets/custom_app_bar.dart';
 import 'package:tesis_app/views/report_map_view.dart';
@@ -65,8 +67,13 @@ class _LoginViewState extends State<LoginView> {
                 onPressed: () async {
                   await AccountService()
                       .login(emailCotroller.text, passController.text)
-                      .then((value) =>
-                          Navigator.pushNamed(context, ReportMapview.route));
+                      .then((value) {
+                    if (value != null) {
+                      //TODO: SHARED PREFERENCES
+                      context.read<AccountProvider>().account = value;
+                      Navigator.pushNamed(context, ReportMapview.route);
+                    }
+                  });
                 },
                 //  Navigator.pushNamed(context, VerificationView.route),
                 child: const Text('Ingresar'),

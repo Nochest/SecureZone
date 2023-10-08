@@ -1,12 +1,15 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:tesis_app/providers/account_provider.dart';
 import 'package:tesis_app/providers/map_provider.dart';
 import 'package:tesis_app/shared/helpers/get_position.dart';
+import 'package:tesis_app/views/emergency_numbers_view.dart';
 import 'package:tesis_app/views/profile_view.dart';
 import 'package:tesis_app/views/report_view.dart';
 import 'package:tesis_app/views/survey_view.dart';
@@ -51,14 +54,14 @@ class _ReportMapviewState extends State<ReportMapview> {
           showDialog(
               context: context,
               builder: (context) {
-                return AlertDialog(
+                return const AlertDialog(
                   title: Text('Zona de peligro'),
                 );
               });
           return;
         }
-        print('${r.latitude},${r.longitude}');
-        print('SERVICE LAUNCHED');
+        log('${r.latitude},${r.longitude}');
+        log('SERVICE LAUNCHED');
       });
     });
 
@@ -118,7 +121,8 @@ class _ReportMapviewState extends State<ReportMapview> {
                     ),
                     const SizedBox(height: 16),
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () => Navigator.pushNamed(
+                          context, EmergencyNumbersView.route),
                       child: const Column(
                         children: [
                           Icon(
@@ -191,18 +195,18 @@ class _ReportMapviewState extends State<ReportMapview> {
                   color: Colors.lightGreen,
                   borderRadius: BorderRadius.circular(25),
                 ),
-                child: const Row(children: [
-                  CircleAvatar(
+                child: Row(children: [
+                  const CircleAvatar(
                     backgroundColor: Colors.blueGrey,
                     child: Icon(
                       Icons.person,
                       color: Colors.white,
                     ),
                   ),
-                  SizedBox(width: 16),
+                  const SizedBox(width: 16),
                   Text(
-                    'UserName here',
-                    style: TextStyle(
+                    context.read<AccountProvider>().account!.names,
+                    style: const TextStyle(
                       color: Colors.white,
                       fontSize: 18,
                       fontWeight: FontWeight.w500,
