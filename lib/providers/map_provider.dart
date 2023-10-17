@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:google_map_marker_animation/core/ripple_marker.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:tesis_app/models/map_zones.dart';
 import 'package:tesis_app/models/report.dart';
@@ -25,7 +26,9 @@ class MapProvider extends ChangeNotifier {
       await MapReporService().getZones().then((value) {
         if (value != null) {
           _mapZone = value;
-          _markers = Set.from(_mapZone!.zones.map((e) => Marker(
+
+          _markers = Set.from(_mapZone!.zones.map((e) => RippleMarker(
+                ripple: true,
                 markerId: MarkerId(UniqueKey().toString()),
                 position: LatLng(
                   double.parse(e.latitud),

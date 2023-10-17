@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:tesis_app/providers/account_provider.dart';
 import 'package:tesis_app/services/account_service.dart';
 import 'package:tesis_app/shared/widgets/custom_app_bar.dart';
+import 'package:tesis_app/shared/widgets/dialogs.dart';
 import 'package:tesis_app/views/report_map_view.dart';
 
 class LoginView extends StatefulWidget {
@@ -72,6 +73,9 @@ class _LoginViewState extends State<LoginView> {
                       //TODO: SHARED PREFERENCES
                       context.read<AccountProvider>().account = value;
                       Navigator.pushNamed(context, ReportMapview.route);
+                    } else {
+                      AppDialogs.errorDialog(
+                          'Error', 'Usuario no registrado', context);
                     }
                   });
                 },

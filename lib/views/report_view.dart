@@ -34,7 +34,7 @@ class _ReportViewState extends State<ReportView> {
             child: Column(
               children: [
                 const Text(
-                  'REGISTERO DE REPORTE',
+                  'REGISTRO DE REPORTE',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     color: Colors.lightGreen,

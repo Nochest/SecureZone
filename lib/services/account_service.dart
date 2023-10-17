@@ -15,7 +15,10 @@ class AccountService {
             Query.equal('email', email),
             Query.equal('password', password),
           ]);
-      return Account.fromJson(result.documents.first.data);
+
+      return result.documents.isNotEmpty
+          ? Account.fromJson(result.documents.first.data)
+          : null;
     } on AppwriteException catch (e) {
       log(e.message!);
       return null;

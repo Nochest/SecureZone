@@ -38,6 +38,9 @@ dependencies:
   provider: ^6.0.5
   intl: ^0.18.1
   url_launcher: ^6.1.14
+  awesome_snackbar_content: ^0.1.1
+  shared_preferences: ^2.2.2
+  google_map_marker_animation: ^0.0.1
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2

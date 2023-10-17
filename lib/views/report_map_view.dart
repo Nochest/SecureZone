@@ -4,6 +4,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:google_map_marker_animation/widgets/animarker.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:tesis_app/providers/account_provider.dart';
@@ -54,8 +55,27 @@ class _ReportMapviewState extends State<ReportMapview> {
           showDialog(
               context: context,
               builder: (context) {
-                return const AlertDialog(
-                  title: Text('Zona de peligro'),
+                return AlertDialog(
+                  alignment: Alignment.center,
+                  content: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Image.asset('assets/ic_advertencia.png'),
+                      const Text(
+                        '¡ADVERTENCIA!',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                        ),
+                      ),
+                      const Text(
+                        'Esta cerca de una zona peligrosa',
+                        style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ],
+                  ),
                 );
               });
           return;
@@ -69,25 +89,32 @@ class _ReportMapviewState extends State<ReportMapview> {
       body: Stack(
         alignment: Alignment.bottomCenter,
         children: [
-          GoogleMap(
-            markers: mapProvider.markers,
-            zoomControlsEnabled: false,
-            mapType: MapType.normal,
-            initialCameraPosition: _kGooglePlex,
-            onMapCreated: (GoogleMapController controller) async {
-              GetCurrentPosition().determinePosition().then((value) async {
-                _controller.complete(controller);
-                final r = await _controller.future;
-                r.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
-                  target: LatLng(
-                    value.latitude,
-                    value.longitude,
-                  ),
-                  zoom: 14.4746,
-                )));
-              });
-            },
-            myLocationEnabled: true,
+          Animarker(
+            mapId: _controller.future.then<int>((value) => value.mapId),
+            rippleRadius: 0.5,
+            rippleColor: Colors.red,
+            rippleDuration: const Duration(milliseconds: 2500),
+            duration: const Duration(milliseconds: 2000),
+            child: GoogleMap(
+              markers: mapProvider.markers,
+              zoomControlsEnabled: false,
+              mapType: MapType.normal,
+              initialCameraPosition: _kGooglePlex,
+              onMapCreated: (GoogleMapController controller) async {
+                GetCurrentPosition().determinePosition().then((value) async {
+                  _controller.complete(controller);
+                  final r = await _controller.future;
+                  r.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
+                    target: LatLng(
+                      value.latitude,
+                      value.longitude,
+                    ),
+                    zoom: 14.4746,
+                  )));
+                });
+              },
+              myLocationEnabled: true,
+            ),
           ),
           Container(
             padding: const EdgeInsets.all(32),
