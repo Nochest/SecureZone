@@ -50,6 +50,7 @@ class _LoginViewState extends State<LoginView> {
               ),
               const SizedBox(height: 8),
               TextFormField(
+                obscureText: true,
                 controller: passController,
                 decoration: const InputDecoration(
                   label: Text('Contraseña'),
