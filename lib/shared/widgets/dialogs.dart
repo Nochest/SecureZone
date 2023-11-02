@@ -17,4 +17,21 @@ class AppDialogs {
       ..hideCurrentSnackBar()
       ..showSnackBar(snackBar);
   }
+
+  static void successDialog(
+      String title, String content, BuildContext context) {
+    final snackBar = SnackBar(
+      elevation: 0,
+      behavior: SnackBarBehavior.floating,
+      backgroundColor: Colors.transparent,
+      content: AwesomeSnackbarContent(
+        title: title,
+        message: content,
+        contentType: ContentType.success,
+      ),
+    );
+    ScaffoldMessenger.of(context)
+      ..hideCurrentSnackBar()
+      ..showSnackBar(snackBar);
+  }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tesis_app/shared/helpers/get_position.dart';
 import 'package:tesis_app/shared/routes/routes.dart';
+import 'package:tesis_app/views/register_view.dart';
 
 class SplashView extends StatefulWidget {
   const SplashView({super.key});
@@ -42,7 +43,7 @@ class _SplashViewState extends State<SplashView> {
             ),
             const SizedBox(height: 8),
             TextButton(
-              onPressed: () {},
+              onPressed: () => Navigator.pushNamed(context, RegisterView.route),
               child: const Text('Crear una cuenta'),
             ),
           ],

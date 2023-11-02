@@ -24,9 +24,11 @@ class ReportMapview extends StatefulWidget {
 
 class _ReportMapviewState extends State<ReportMapview> {
   final CameraPosition _kGooglePlex = const CameraPosition(
-    target: LatLng(-11.922794543845349,
-        -77.04878777540037), //Parque Metropolitano SinchiRoca
-    zoom: 14.4746,
+    target: LatLng(
+      -11.922794543845349,
+      -77.04878777540037,
+    ),
+    zoom: 14,
   );
 
   final Completer<GoogleMapController> _controller =
@@ -44,45 +46,45 @@ class _ReportMapviewState extends State<ReportMapview> {
   @override
   Widget build(BuildContext context) {
     final mapProvider = Provider.of<MapProvider>(context);
-    //Timer.periodic(const Duration(minutes: 5), (timer) {
-    //  mapProvider.getMapZones(context);
-    //  Geolocator.getCurrentPosition().then((r) {
-    //    if (mapProvider.markers.any((e) =>
-    //        Geolocator.distanceBetween(r.latitude, r.longitude,
-    //            e.position.latitude, e.position.longitude) <
-    //        50)) {
-    //      showDialog(
-    //          context: context,
-    //          builder: (context) {
-    //            return AlertDialog(
-    //              alignment: Alignment.center,
-    //              content: Column(
-    //                mainAxisSize: MainAxisSize.min,
-    //                children: [
-    //                  Image.asset('assets/ic_advertencia.png'),
-    //                  const Text(
-    //                    '¡ADVERTENCIA!',
-    //                    style: TextStyle(
-    //                      fontWeight: FontWeight.bold,
-    //                      fontSize: 20,
-    //                    ),
-    //                  ),
-    //                  const Text(
-    //                    'Esta cerca de una zona peligrosa',
-    //                    style: TextStyle(
-    //                      fontWeight: FontWeight.w500,
-    //                    ),
-    //                  ),
-    //                ],
-    //              ),
-    //            );
-    //          });
-    //      return;
-    //    }
-    //    log('${r.latitude},${r.longitude}');
-    //    log('SERVICE LAUNCHED');
-    //  });
-    //});
+    // Timer.periodic(const Duration(minutes: 5), (timer) {
+    //   mapProvider.getMapZones(context);
+    //   Geolocator.getCurrentPosition().then((r) {
+    //     if (mapProvider.markers.any((e) =>
+    //         Geolocator.distanceBetween(r.latitude, r.longitude,
+    //             e.position.latitude, e.position.longitude) <
+    //         50)) {
+    //       showDialog(
+    //           context: context,
+    //           builder: (context) {
+    //             return AlertDialog(
+    //               alignment: Alignment.center,
+    //               content: Column(
+    //                 mainAxisSize: MainAxisSize.min,
+    //                 children: [
+    //                   Image.asset('assets/ic_advertencia.png'),
+    //                   const Text(
+    //                     '¡ADVERTENCIA!',
+    //                     style: TextStyle(
+    //                       fontWeight: FontWeight.bold,
+    //                       fontSize: 20,
+    //                     ),
+    //                   ),
+    //                   const Text(
+    //                     'Esta cerca de una zona peligrosa',
+    //                     style: TextStyle(
+    //                       fontWeight: FontWeight.w500,
+    //                     ),
+    //                   ),
+    //                 ],
+    //               ),
+    //             );
+    //           });
+    //       return;
+    //     }
+    //     log('${r.latitude},${r.longitude}');
+    //     log('SERVICE LAUNCHED');
+    //   });
+    // });
 
     return Scaffold(
       body: Stack(

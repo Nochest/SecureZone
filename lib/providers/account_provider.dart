@@ -8,4 +8,11 @@ class AccountProvider extends ChangeNotifier {
     _account = value;
     notifyListeners();
   }
+
+  String _phoneNumber = '';
+  String get phoneNumber => _phoneNumber;
+  set phoneNumber(String value) {
+    _phoneNumber = value;
+    notifyListeners();
+  }
 }

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:provider/provider.dart';
 import 'package:tesis_app/models/survey.dart';
-import 'package:tesis_app/providers/account_provider.dart';
 import 'package:tesis_app/providers/survey_provider.dart';
 import 'package:tesis_app/shared/widgets/custom_app_bar.dart';
 

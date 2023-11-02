@@ -24,4 +24,28 @@ class AccountService {
       return null;
     }
   }
+
+  Future<int> add(Account request) async {
+    try {
+      final doc = await ApiClient.database.createDocument(
+          databaseId: Constants.database,
+          collectionId: Constants.collectionAccountId,
+          documentId: 'unique()',
+          data: {
+            'names': request.names,
+            'email': request.email,
+            'phone': request.phome,
+            'password': request.pasword,
+            'dni': request.dni,
+            'imageEncoded': request.imageEncoded,
+          });
+      if (doc.$createdAt.isNotEmpty) {
+        return 200;
+      }
+      return 400;
+    } on AppwriteException catch (e) {
+      log(e.message!);
+      return 500;
+    }
+  }
 }
