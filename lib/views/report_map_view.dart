@@ -232,7 +232,7 @@ class _ReportMapviewState extends State<ReportMapview> {
                   ),
                   const SizedBox(width: 16),
                   Text(
-                    context.read<AccountProvider>().account!.names,
+                    context.read<AccountProvider>().account?.names ?? '',
                     style: const TextStyle(
                       color: Colors.white,
                       fontSize: 18,

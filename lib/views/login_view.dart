@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tesis_app/main.dart';
 import 'package:tesis_app/providers/account_provider.dart';
 import 'package:tesis_app/services/account_service.dart';
 import 'package:tesis_app/shared/widgets/custom_app_bar.dart';
@@ -50,6 +51,7 @@ class _LoginViewState extends State<LoginView> {
               ),
               const SizedBox(height: 8),
               TextFormField(
+                obscureText: true,
                 controller: passController,
                 decoration: const InputDecoration(
                   label: Text('Contraseña'),
@@ -70,7 +72,7 @@ class _LoginViewState extends State<LoginView> {
                       .login(emailCotroller.text, passController.text)
                       .then((value) {
                     if (value != null) {
-                      //TODO: SHARED PREFERENCES
+                      localStorage.setString('user', value.toRawJson());
                       context.read<AccountProvider>().account = value;
                       Navigator.pushNamed(context, ReportMapview.route);
                     } else {
@@ -79,7 +81,6 @@ class _LoginViewState extends State<LoginView> {
                     }
                   });
                 },
-                //  Navigator.pushNamed(context, VerificationView.route),
                 child: const Text('Ingresar'),
               ),
               const SizedBox(height: 8),
