@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tesis_app/providers/account_provider.dart';
 import 'package:tesis_app/providers/map_provider.dart';
+import 'package:tesis_app/providers/survey_provider.dart';
 import 'package:tesis_app/shared/routes/app_routes.dart';
 import 'package:tesis_app/shared/theme/app_theme.dart';
 import 'package:tesis_app/views/splash_view.dart';
@@ -16,6 +17,7 @@ void main() async {
     providers: [
       ChangeNotifierProvider(create: (_) => MapProvider()),
       ChangeNotifierProvider(create: (_) => AccountProvider()),
+      ChangeNotifierProvider(create: (_) => SurveyProvider()),
     ],
     child: const MyApp(),
   ));

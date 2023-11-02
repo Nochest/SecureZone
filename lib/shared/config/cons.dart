@@ -9,4 +9,5 @@ class Constants {
   // Documments
   static const String collectionAccountId = "accounts";
   static const String collectionReportId = "reports";
+  static const String collectionSurveyId = "surveys";
 }
