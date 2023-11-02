@@ -135,7 +135,7 @@ class _RegisterViewState extends State<RegisterView> {
                       pasword: passCtrl.text,
                       dni: dniCtrl.text,
                       imageEncoded:
-                          bites == null ? '' : base64Encode(bites!.toList()),
+                          bites == null ? '' : base64Encode(bites.toList()),
                     );
 
                     final r = await AccountService().add(request);

@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:appwrite/appwrite.dart' hide Account;
+import 'package:tesis_app/main.dart';
 import 'package:tesis_app/models/account.dart';
 import 'package:tesis_app/shared/config/api_client.dart';
 import 'package:tesis_app/shared/config/cons.dart';
@@ -40,6 +41,65 @@ class AccountService {
             'imageEncoded': request.imageEncoded,
           });
       if (doc.$createdAt.isNotEmpty) {
+        return 200;
+      }
+      return 400;
+    } on AppwriteException catch (e) {
+      log(e.message!);
+      return 500;
+    }
+  }
+
+  Future<int> updatePassword(String newPassword) async {
+    final acc = Account.fromRawJson(localStorage.getString('user')!);
+    try {
+      final result = await ApiClient.database.listDocuments(
+          databaseId: Constants.database,
+          collectionId: Constants.collectionAccountId,
+          queries: [
+            Query.equal('email', acc.email),
+            Query.equal('password', acc.pasword),
+          ]);
+      final id = result.documents.first.$id;
+
+      final doc = await ApiClient.database.updateDocument(
+          databaseId: Constants.database,
+          collectionId: Constants.collectionAccountId,
+          documentId: id,
+          data: {
+            'password': newPassword,
+          });
+      if (doc.$updatedAt.isNotEmpty) {
+        return 200;
+      }
+      return 400;
+    } on AppwriteException catch (e) {
+      log(e.message!);
+      return 500;
+    }
+  }
+
+  Future<int> updateInfo(String name, String phone, String image) async {
+    final acc = Account.fromRawJson(localStorage.getString('user')!);
+    try {
+      final result = await ApiClient.database.listDocuments(
+          databaseId: Constants.database,
+          collectionId: Constants.collectionAccountId,
+          queries: [
+            Query.equal('email', acc.email),
+          ]);
+      final id = result.documents.first.$id;
+
+      final doc = await ApiClient.database.updateDocument(
+          databaseId: Constants.database,
+          collectionId: Constants.collectionAccountId,
+          documentId: id,
+          data: {
+            'names': name,
+            'phone': phone,
+            'imageEncoded': image,
+          });
+      if (doc.$updatedAt.isNotEmpty) {
         return 200;
       }
       return 400;

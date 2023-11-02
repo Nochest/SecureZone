@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:tesis_app/main.dart';
+import 'package:tesis_app/models/account.dart';
+import 'package:tesis_app/providers/account_provider.dart';
 import 'package:tesis_app/shared/helpers/get_position.dart';
 import 'package:tesis_app/shared/routes/routes.dart';
 import 'package:tesis_app/views/register_view.dart';
@@ -43,6 +46,8 @@ class _SplashViewState extends State<SplashView> {
             ElevatedButton(
               onPressed: () {
                 if (localStorage.getString('user') != null) {
+                  context.read<AccountProvider>().account =
+                      Account.fromRawJson(localStorage.getString('user')!);
                   Navigator.pushNamed(context, ReportMapview.route);
                 } else {
                   Navigator.pushNamed(context, LoginView.route);

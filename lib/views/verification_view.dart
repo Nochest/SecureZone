@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:tesis_app/shared/routes/routes.dart';
 import 'package:tesis_app/shared/widgets/custom_app_bar.dart';
-import 'package:tesis_app/views/report_map_view.dart';
+import 'package:tesis_app/shared/widgets/dialogs.dart';
 
 class VerificationView extends StatefulWidget {
   const VerificationView({super.key});
@@ -80,7 +81,11 @@ class _VerificationViewState extends State<VerificationView> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => Navigator.pushNamed(context, ReportMapview.route),
+        onPressed: () {
+          AppDialogs.successDialog(
+              'Exito!', 'Cuenta verificada, inicie sesión', context);
+          Navigator.pushNamed(context, LoginView.route);
+        },
         child: const Icon(Icons.arrow_forward_rounded),
       ),
     );

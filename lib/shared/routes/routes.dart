@@ -1,2 +1,11 @@
 export 'package:tesis_app/views/splash_view.dart';
 export 'package:tesis_app/views/login_view.dart';
+export 'package:tesis_app/views/config_view.dart';
+export 'package:tesis_app/views/emergency_numbers_view.dart';
+export 'package:tesis_app/views/profile_view.dart';
+export 'package:tesis_app/views/register_view.dart';
+export 'package:tesis_app/views/report_map_view.dart';
+export 'package:tesis_app/views/report_view.dart';
+export 'package:tesis_app/views/survey_view.dart';
+export 'package:tesis_app/views/verification_view.dart';
+export 'package:tesis_app/views/update_profile_view.dart';

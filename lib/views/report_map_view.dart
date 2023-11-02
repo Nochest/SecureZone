@@ -10,6 +10,7 @@ import 'package:provider/provider.dart';
 import 'package:tesis_app/providers/account_provider.dart';
 import 'package:tesis_app/providers/map_provider.dart';
 import 'package:tesis_app/shared/helpers/get_position.dart';
+import 'package:tesis_app/shared/routes/routes.dart';
 import 'package:tesis_app/views/emergency_numbers_view.dart';
 import 'package:tesis_app/views/profile_view.dart';
 import 'package:tesis_app/views/report_view.dart';
@@ -99,6 +100,7 @@ class _ReportMapviewState extends State<ReportMapview> {
             child: GoogleMap(
               markers: mapProvider.markers,
               zoomControlsEnabled: false,
+              myLocationButtonEnabled: false,
               mapType: MapType.normal,
               initialCameraPosition: _kGooglePlex,
               onMapCreated: (GoogleMapController controller) async {
@@ -187,7 +189,8 @@ class _ReportMapviewState extends State<ReportMapview> {
                     ),
                     const SizedBox(height: 16),
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () =>
+                          Navigator.pushNamed(context, ConfigurationView.route),
                       child: const Column(
                         children: [
                           Icon(
