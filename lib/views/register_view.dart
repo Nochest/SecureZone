@@ -117,13 +117,10 @@ class _RegisterViewState extends State<RegisterView> {
                         .hasMatch(passCtrl.text)) {
                       AppDialogs.errorDialog(
                           'Error',
-                          '''Las contraseñas debe de tener:\n
-                          Minimo 8 caracteres.\n
-                          Al menos una letra mayuscula.\n
-                          Un numero\n
-                          Un caracter especial
+                          '''Las contraseñas debe de tener:\n\nMinimo 8 caracteres.\nAl menos una letra mayuscula.\nUn número\nUn caracter especial
                           ''',
-                          context);
+                          context,
+                          size: MediaQuery.of(context).size.height / 4);
                       return;
                     }
                     final bites = await await pickedFile?.readAsBytes();
